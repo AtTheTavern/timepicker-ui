@@ -1428,15 +1428,13 @@ export default class TimepickerUI {
         eventType: type,
         type: this.activeTypeMode?.dataset.type,
       });
-    }
+    } else if (this.hourTips !== null) {
+      const myLocation = touches ? touches[0] : undefined;
+      const realTarget =
+        touches && myLocation
+          ? (document.elementFromPoint(myLocation.clientX, myLocation.clientY) as HTMLDivElement)
+          : null;
 
-    const myLocation = touches ? touches[0] : undefined;
-    const realTarget =
-      touches && myLocation
-        ? (document.elementFromPoint(myLocation.clientX, myLocation.clientY) as HTMLDivElement)
-        : null;
-
-    if (this.hourTips !== null) {
       this.hour?.classList.add(selectorActive);
       if (
         !hasClass(realTarget || target, 'timepicker-ui-value-tips-24h') &&
